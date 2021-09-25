@@ -134,6 +134,7 @@ form button:hover{
   text-align: center;
   background: #f2f2f2;
   padding: 10px 0;
+  float:left;
 }
 .urls-area .data li{
   padding: 8px 10px;
@@ -141,6 +142,7 @@ form button:hover{
   align-items: center;
   justify-content: center;
   word-break: break-all;
+  float:left;
 }
 .urls-area .data li:last-child a{
   height: 100%;
