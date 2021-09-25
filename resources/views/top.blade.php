@@ -18,10 +18,7 @@
 
     
         <div class="statistics">
-
-
-            
-            <span>Total Links: <span><?php echo $urls->count() ?></span></span>
+            <!-- <span>Total Links: <span><?php echo $urls->count() ?></span></span> -->
             <a href="{{route('index')}}">Add a URL</a>
         </div>
         <!--URL LIST-->

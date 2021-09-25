@@ -28,13 +28,15 @@ class Controller extends BaseController
     }
 
     function saveURL(Request $request){
-        $og_url = addslashes($request['full_url']);
+        $og_url = str_replace(' ', '',addslashes($request['full_url']));
         $shorten_url = $this->generateShortenedURL($og_url);
         if(!empty($shorten_url)){
+            if(preg_match("/\//i", $og_url)){
                 $url = new URL();
                 $explodeURL = explode('/', $shorten_url);
                 $shortURL = end($explodeURL);
                 if($shortURL != ""){
+                    
                     $url->shorten_url = $shortURL;
                     $url->full_url = $og_url;
                     $url->clicks = 0;
@@ -47,6 +49,9 @@ class Controller extends BaseController
                     echo "Required - You have to enter short url. It cannot be left blank!";
                 }
 
+            }else{
+                echo "Invalid URL - Please Enter a valid URL";
+            }
         }else{
             echo "Error - You have to enter short url! ". $shorten_url;
         }
