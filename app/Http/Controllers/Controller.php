@@ -29,7 +29,7 @@ class Controller extends BaseController
 
     function saveURL(Request $request){
         $og_url = addslashes($request['full_url']);
-        $shorten_url = generateShortenedURL($og_url);
+        $shorten_url = $this->generateShortenedURL($og_url);
         if(!empty($shorten_url)){
                 $url = new URL();
                 $explodeURL = explode('/', $shorten_url);
@@ -44,7 +44,7 @@ class Controller extends BaseController
                         return redirect()->back()->with('message', 'Error adding link');   
                     }
                 }else{
-                    echo "Required - You have to enter short url!";
+                    echo "Required - You have to enter short url. It cannot be left blank!";
                 }
 
         }else{
@@ -61,9 +61,17 @@ class Controller extends BaseController
            return  redirect()->to($redirect_url);
         }
     }
-    function deleteURL($id){}
-    function deleteAll(){
-
+    function deleteURL($id){
+        $url = URL::find($id);
+        if($url->delete()){
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
+    }
+    function topURLs(){
+        $urls = URL::orderBy('clicks','desc')->take(100)->get();//Retrieve only top 100 URLS
+        return view('top',['urls'=>$urls]);
     }
 
 }

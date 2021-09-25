@@ -13,10 +13,10 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/', [Controller::class, 'index'] );
+Route::get('/', [Controller::class, 'index'] )->name('index');
 
 Route::post('/save-url', [Controller::class, 'saveURL'] )->name('saveURL');
 
 Route::get('/click/{shorten_url_id}', [Controller::class, 'clickLink'])->name('click');
 Route::get('/delete-url/{id}', [Controller::class, 'deleteURL'])->name('deleteURL');
-Route::get('/delete-url/all', [Controller::class, 'deleteAll'])->name('deleteAll');     
+Route::get('/top', [Controller::class, 'topURLs'])->name('top');     
