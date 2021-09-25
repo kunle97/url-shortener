@@ -36,7 +36,7 @@
                 <div class="data">
                 <li>
                 <?php  $domain =  $_SERVER['SERVER_NAME']."/"; ?>
-                  <a href="{{ $url->full_url}}" target="_blank">
+                  <a href="{{ route('click', $url->shorten_url) }}" target="_blank">
                   <?php
                     if($domain.strlen($url->shorten_url) > 50){
                       echo $domain.substr( $url->shorten_url, 0, 50) . '...';

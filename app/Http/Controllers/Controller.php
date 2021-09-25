@@ -17,10 +17,19 @@ class Controller extends BaseController
         return view('welcome',['urls'=>$urls]);
     }
 
+    function generateShortenedURL($url){//Function to genereate a shortened url ending
+        $shortened_url = substr(md5(microtime()), rand(0, 26), 5);
+        $url_exists = URL::where('shorten_url', $shortened_url)->exists(); //Chekc
+        if($url_exists){
+            generateShortenedURL($url);
+        }else{
+            return $shortened_url;
+        }
+    }
+
     function saveURL(Request $request){
         $og_url = addslashes($request['full_url']);
-        $shorten_url = substr(md5(microtime()), rand(0, 26), 5);
-        $hidden_url = addslashes($request['hidden_url']);
+        $shorten_url = generateShortenedURL($og_url);
         if(!empty($shorten_url)){
                 $url = new URL();
                 $explodeURL = explode('/', $shorten_url);
@@ -39,12 +48,18 @@ class Controller extends BaseController
                 }
 
         }else{
-            echo "Error- You have to enter short url! ". $shorten_url;
+            echo "Error - You have to enter short url! ". $shorten_url;
         }
     
     }
     function clickLink($shorten_url){
-
+        $url = URL::where('shorten_url',$shorten_url)->first();
+        $redirect_url = $url->full_url;
+        echo $redirect_url;
+        $url->clicks = $url->clicks + 1;  
+        if($url->update()){
+           return  redirect()->to($redirect_url);
+        }
     }
     function deleteURL($id){}
     function deleteAll(){
