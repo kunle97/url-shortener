@@ -43,5 +43,12 @@ class Controller extends BaseController
         }
     
     }
+    function clickLink($shorten_url){
+
+    }
+    function deleteURL($id){}
+    function deleteAll(){
+
+    }
 
 }

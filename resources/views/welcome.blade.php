@@ -17,22 +17,11 @@
 
     
         <div class="statistics">
-            <?php
-              // $sql3 = mysqli_query($conn, "SELECT COUNT(*) FROM url");
-              // $res = mysqli_fetch_assoc($sql3);
 
-              // $sql4 = mysqli_query($conn, "SELECT clicks FROM url");
-              // $total = 0;
-              // while($count = mysqli_fetch_assoc($sql4)){
-           
-              //   $total = $count['clicks'] + $total;
-             
-              // }
-            ?>
 
             
-            <span>Total Links: <span><?php //echo end($res) ?></span> & Total Clicks: <span><?php //echo $total ?></span></span>
-            <a href="php/delete.php?delete=all">Clear All</a>
+            <span>Total Links: <span><?php echo $urls->count() ?></span></span>
+            <a href="{{route('deleteAll')}}">Clear All</a>
         </div>
         <!--URL LIST-->
         <div class="urls-area">
@@ -71,7 +60,7 @@
                 </li> 
               </li>
                 <li><?php echo $url->clicks ?></li>
-                <li><a href="php/delete.php?id=<?php echo $url->shorten_url ?>">Delete</a></li>
+                <li><a href="">Delete</a></li>
               </div>
               @endforeach
 
